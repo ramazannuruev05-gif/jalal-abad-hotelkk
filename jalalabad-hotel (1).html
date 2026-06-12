@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jalal-Abad Hotel — Роскошь в Сердце Кыргызстана</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --midnight: #060810;
+    --deep: #0B1020;
+    --surface: #131B32;
+    --card: #1B2540;
+    --gold: #F2B33D;
+    --gold-light: #FFE08A;
+    --gold-deep: #D88A2B;
+    --gold-dim: rgba(242,179,61,0.18);
+    --emerald: #19C2A0;
+    --emerald-dim: rgba(25,194,160,0.15);
+    --gold-gradient: linear-gradient(135deg, #FFE08A 0%, #F2B33D 55%, #D88A2B 100%);
+    --cream: #FBF7EE;
+    --muted: #97A0BE;
+    --white: #FFFFFF;
+    --border: rgba(242,179,61,0.18);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--midnight);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ─── CANVAS PARTICLES ─── */
+  #particles-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.5s, padding 0.4s, backdrop-filter 0.5s;
+  }
+  nav.scrolled {
+    background: rgba(7,9,15,0.88);
+    backdrop-filter: blur(20px);
+    padding: 16px 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .nav-logo-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .nav-logo-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 10px 28px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+  }
+  .nav-cta:hover {
+    background: var(--gold-gradient);
+    color: var(--midnight);
+    box-shadow: 0 6px 24px rgba(242,179,61,0.4);
+  }
+
+  .nav-premium-badge {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--midnight);
+    background: var(--emerald);
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-left: 12px;
+    font-weight: 600;
+  }
+  .nav-logo-row { display: flex; align-items: center; }
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 50% 35%, rgba(242,179,61,0.14) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 45% at 15% 85%, rgba(25,194,160,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 40% at 90% 15%, rgba(242,179,61,0.08) 0%, transparent 55%),
+      linear-gradient(180deg, var(--midnight) 0%, var(--deep) 50%, var(--midnight) 100%);
+    z-index: -1;
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: -1;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
+  }
+  .hero-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s 0.3s forwards;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 8vw, 110px);
+    font-weight: 400;
+    line-height: 1.0;
+    text-align: center;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1s 0.5s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 60px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s 0.7s forwards;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s 0.9s forwards;
+  }
+  .btn-primary {
+    background: var(--gold-gradient);
+    color: var(--midnight);
+    box-shadow: 0 8px 30px rgba(242,179,61,0.35);
+    padding: 16px 44px;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 16px 50px rgba(242,179,61,0.55);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    padding: 16px 44px;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid rgba(248,244,238,0.3);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeUp 1s 1.4s forwards;
+  }
+  .hero-scroll span {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(var(--gold), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+  @keyframes scrollPulse {
+    0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+    50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    51% { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+    100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+  }
+  .hero-stats {
+    position: absolute;
+    bottom: 40px;
+    right: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s forwards;
+  }
+  .hero-stat {
+    text-align: right;
+  }
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ─── DIVIDER ─── */
+  .gold-divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 24px;
+  }
+  .section-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 400;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .section-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--muted);
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto;
+    font-style: italic;
+    line-height: 1.8;
+  }
+
+  /* ─── ABOUT ─── */
+  .about {
+    position: relative;
+    z-index: 1;
+    padding: 120px 60px;
+  }
+  .about-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-img-frame {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .about-img-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 30% 30%, rgba(201,168,76,0.12), transparent 60%),
+      linear-gradient(135deg, var(--deep), var(--surface));
+  }
+  .hotel-illustration {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .hotel-icon-large {
+    font-size: 80px;
+    filter: drop-shadow(0 0 30px rgba(201,168,76,0.4));
+  }
+  .hotel-icon-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .about-badge {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 120px;
+    height: 120px;
+    background: var(--gold-gradient);
+    box-shadow: 0 14px 40px rgba(242,179,61,0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .about-badge-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--midnight);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .about-badge-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(7,9,15,0.7);
+    text-align: center;
+  }
+  .about-content { }
+  .about-content .section-eyebrow { text-align: left; }
+  .about-content .section-title { text-align: left; font-size: clamp(28px,3vw,42px); }
+  .about-content .section-desc { text-align: left; margin: 0 0 40px; }
+  .about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 40px;
+  }
+  .about-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .about-feature:hover {
+    border-color: var(--gold);
+    background: var(--card);
+  }
+  .feature-icon {
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .feature-text {}
+  .feature-name {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .feature-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ─── ROOMS ─── */
+  .rooms {
+    position: relative;
+    z-index: 1;
+    padding: 120px 60px;
+    background: var(--deep);
+  }
+  .rooms-header {
+    max-width: 1200px;
+    margin: 0 auto 70px;
+  }
+  .rooms-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .room-card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s, box-shadow 0.4s;
+    group: true;
+  }
+  .room-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px var(--gold);
+    z-index: 2;
+  }
+  .room-card:first-child {
+    grid-column: span 2;
+  }
+  .room-visual {
+    aspect-ratio: 16/9;
+    background: var(--card);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .room-card:first-child .room-visual {
+    aspect-ratio: 16/8;
+  }
+  .room-visual-bg {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.6s;
+  }
+  .room-card:hover .room-visual-bg { transform: scale(1.05); }
+  .room-emoji { font-size: 48px; position: relative; z-index: 1; }
+  .room-visual-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: rgba(248,244,238,0.5);
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+  .room-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 40%, rgba(7,9,15,0.9));
+    z-index: 1;
+  }
+  .room-tag {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--gold-gradient);
+    box-shadow: 0 6px 20px rgba(242,179,61,0.4);
+    color: var(--midnight);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 6px 14px;
+    z-index: 2;
+  }
+  .room-info {
+    padding: 28px;
+  }
+  .room-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: var(--cream);
+  }
+  .room-card:first-child .room-name { font-size: 28px; }
+  .room-detail {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .room-amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .amenity-tag {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    padding: 4px 10px;
+  }
+  .room-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .room-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  .price-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+  }
+  .price-currency {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .price-period {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .room-book-btn {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 10px 22px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .room-book-btn:hover {
+    background: var(--gold);
+    color: var(--midnight);
+  }
+
+  /* ─── EXPERIENCE ─── */
+  .experience {
+    position: relative;
+    z-index: 1;
+    padding: 120px 60px;
+    overflow: hidden;
+  }
+  .experience-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .exp-header {
+    margin-bottom: 70px;
+  }
+  .exp-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+  .exp-item {
+    background: var(--midnight);
+    padding: 50px 32px;
+    text-align: center;
+    transition: background 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+  .exp-item:hover { background: var(--surface); }
+  .exp-item:hover::before { transform: scaleX(1); }
+  .exp-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .exp-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: var(--cream);
+  }
+  .exp-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ─── GALLERY ─── */
+  .gallery {
+    position: relative;
+    z-index: 1;
+    padding: 120px 60px;
+    background: var(--deep);
+  }
+  .gallery-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .gallery-header { margin-bottom: 60px; }
+  .gallery-mosaic {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 160px);
+    gap: 3px;
+  }
+  .gallery-item {
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .gallery-item:nth-child(4) { grid-column: span 2; }
+  .gallery-item:nth-child(6) { grid-column: span 2; grid-row: span 2; }
+  .gallery-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(201,168,76,0);
+    transition: background 0.4s;
+  }
+  .gallery-item:hover::after {
+    background: rgba(201,168,76,0.12);
+  }
+  .gallery-emoji {
+    font-size: 40px;
+    opacity: 0.4;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .gallery-item:hover .gallery-emoji {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+  .gallery-item-label {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(248,244,238,0.5);
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials {
+    position: relative;
+    z-index: 1;
+    padding: 120px 60px;
+  }
+  .testimonials-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .testimonials-header { margin-bottom: 60px; }
+  .testimonials-track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .testimonial-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 40px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .testimonial-card:hover { border-color: var(--gold); }
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    line-height: 0.5;
+    color: var(--gold);
+    opacity: 0.3;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .author-avatar {
+    width: 44px;
+    height: 44px;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .author-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+  }
+  .author-location {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .testimonial-stars {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    gap: 3px;
+  }
+  .star { color: var(--gold); font-size: 12px; }
+
+  /* ─── BOOKING ─── */
+  .booking {
+    position: relative;
+    z-index: 1;
+    padding: 120px 60px;
+    background: var(--deep);
+  }
+  .booking-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .booking-header { margin-bottom: 60px; }
+  .booking-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 60px;
+  }
+  .booking-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .booking-row.full { grid-template-columns: 1fr; }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .form-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .form-input, .form-select {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--cream);
+    padding: 14px 18px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    transition: border-color 0.3s;
+    outline: none;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+  .form-input:focus, .form-select:focus { border-color: var(--gold); }
+  .form-select option { background: var(--card); }
+  .form-input::placeholder { color: var(--muted); }
+  .booking-submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+  .booking-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--muted);
+    max-width: 360px;
+  }
+  .booking-note strong {
+    color: var(--gold);
+    font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+  }
+  .btn-submit {
+    background: var(--gold-gradient);
+    color: var(--midnight);
+    box-shadow: 0 8px 30px rgba(242,179,61,0.35);
+    padding: 18px 56px;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .btn-submit:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 16px 50px rgba(242,179,61,0.55);
+  }
+
+  /* ─── LOCATION ─── */
+  .location-section {
+    position: relative;
+    z-index: 1;
+    padding: 120px 60px;
+  }
+  .location-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .location-content .section-eyebrow { text-align: left; }
+  .location-content .section-title { text-align: left; font-size: clamp(28px,3vw,42px); }
+  .location-map-area {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .map-pin { font-size: 48px; }
+  .map-address {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--cream);
+    text-align: center;
+  }
+  .map-link {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+    transition: opacity 0.3s;
+    margin-top: 8px;
+    display: inline-block;
+  }
+  .map-link:hover { opacity: 0.7; }
+  .location-details {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .location-detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .location-detail-item:hover { border-color: var(--gold); }
+  .detail-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .detail-title {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .detail-value {
+    font-size: 14px;
+    color: var(--cream);
+    line-height: 1.5;
+  }
+  .detail-link {
+    color: var(--gold);
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .detail-link:hover { opacity: 0.7; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative;
+    z-index: 1;
+    background: var(--midnight);
+    border-top: 1px solid var(--border);
+    padding: 80px 60px 40px;
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .footer-brand {}
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .footer-social {
+    display: flex;
+    gap: 12px;
+  }
+  .social-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: border-color 0.3s, background 0.3s;
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+  }
+  .social-btn:hover {
+    border-color: var(--gold);
+    background: var(--gold-dim);
+  }
+  .footer-col-title {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-links a {
+    font-size: 14px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-bottom {
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-copy {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .footer-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer-rating-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--gold);
+  }
+  .footer-rating-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ─── MODAL ─── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(7,9,15,0.9);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .modal-box {
+    background: var(--surface);
+    border: 1px solid var(--gold);
+    padding: 60px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    transform: scale(0.95) translateY(20px);
+    transition: transform 0.4s;
+  }
+  .modal-overlay.active .modal-box {
+    transform: scale(1) translateY(0);
+  }
+  .modal-icon { font-size: 50px; margin-bottom: 20px; }
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .modal-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .modal-close {
+    background: var(--gold);
+    color: var(--midnight);
+    border: none;
+    padding: 14px 40px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .modal-close:hover { background: var(--gold-light); }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    nav.scrolled { padding: 14px 24px; }
+    .nav-links, .nav-cta, .hero-stats { display: none; }
+    .hero-title { font-size: 42px; }
+    .about { padding: 80px 24px; }
+    .about-inner { grid-template-columns: 1fr; gap: 40px; }
+    .rooms { padding: 80px 24px; }
+    .rooms-grid { grid-template-columns: 1fr; }
+    .room-card:first-child { grid-column: span 1; }
+    .experience { padding: 80px 24px; }
+    .exp-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery { padding: 80px 24px; }
+    .gallery-mosaic { grid-template-columns: repeat(2,1fr); grid-template-rows: repeat(5, 120px); }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+    .gallery-item:nth-child(4) { grid-column: span 1; }
+    .gallery-item:nth-child(6) { grid-column: span 2; grid-row: span 1; }
+    .testimonials { padding: 80px 24px; }
+    .testimonials-track { grid-template-columns: 1fr; }
+    .booking { padding: 80px 24px; }
+    .booking-form { padding: 30px 24px; }
+    .booking-row { grid-template-columns: 1fr; }
+    .booking-submit { flex-direction: column; gap: 20px; align-items: flex-start; }
+    .location-section { padding: 80px 24px; }
+    .location-inner { grid-template-columns: 1fr; gap: 40px; }
+    footer { padding: 60px 24px 30px; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; gap: 16px; }
+  }
+
+  /* ─── FLOATING QUICK ACTIONS ─── */
+  .quick-actions {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-end;
+  }
+  .quick-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--midnight);
+    padding: 14px 22px;
+    border-radius: 999px;
+    background: var(--gold-gradient);
+    box-shadow: 0 10px 30px rgba(242,179,61,0.45);
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: floatPulse 3s ease-in-out infinite;
+  }
+  .quick-btn.alt {
+    background: var(--emerald);
+    color: var(--midnight);
+    box-shadow: 0 10px 30px rgba(25,194,160,0.4);
+    animation-delay: 0.4s;
+  }
+  .quick-btn:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 16px 40px rgba(242,179,61,0.6);
+  }
+  .quick-btn.alt:hover { box-shadow: 0 16px 40px rgba(25,194,160,0.55); }
+  .quick-icon { font-size: 16px; }
+  @keyframes floatPulse {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  @media (max-width: 900px) {
+    .quick-actions { bottom: 16px; right: 16px; }
+    .quick-btn { padding: 12px 18px; font-size: 11px; }
+  }
+
+  /* ─── PRELOADER ─── */
+  #preloader {
+    position: fixed;
+    inset: 0;
+    background: var(--midnight);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 24px;
+    transition: opacity 0.6s, visibility 0.6s;
+  }
+  #preloader.hidden { opacity: 0; visibility: hidden; }
+  .preloader-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .preloader-bar {
+    width: 200px;
+    height: 1px;
+    background: var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .preloader-fill {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    background: var(--gold);
+    animation: fillBar 1.5s ease-out forwards;
+  }
+  @keyframes fillBar {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div class="preloader-logo">Jalal-Abad</div>
+  <div class="preloader-bar"><div class="preloader-fill"></div></div>
+</div>
+
+<!-- Particles -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- Quick Actions -->
+<div class="quick-actions">
+  <a href="https://wa.me/996509447717" target="_blank" class="quick-btn alt"><span class="quick-icon">💬</span> WhatsApp</a>
+  <a href="#booking" class="quick-btn"><span class="quick-icon">✨</span> Забронировать</a>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal-box">
+    <div class="modal-icon">✨</div>
+    <div class="modal-title">Запрос принят</div>
+    <div class="modal-text">Благодарим за ваш интерес к отелю Jalal-Abad. Наш менеджер свяжется с вами в течение 30 минут для подтверждения бронирования.</div>
+    <button class="modal-close" onclick="closeModal()">Закрыть</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo-row">
+    <div class="nav-logo">
+      <span class="nav-logo-main">Jalal-Abad</span>
+      <span class="nav-logo-sub">Джалал-Абад, Кыргызстан</span>
+    </div>
+    <span class="nav-premium-badge">Premium</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">Об отеле</a></li>
+    <li><a href="#rooms">Номера</a></li>
+    <li><a href="#experience">Услуги</a></li>
+    <li><a href="#gallery">Галерея</a></li>
+    <li><a href="#location">Контакты</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Забронировать</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  
+  <div class="hero-eyebrow">Добро пожаловать в</div>
+  <h1 class="hero-title">Jalal&#8209;<em>Abad</em></h1>
+  <p class="hero-subtitle">Роскошь и уют в сердце Кыргызстана</p>
+  <div class="hero-actions">
+    <a href="#booking" class="btn-primary">Забронировать номер</a>
+    <a href="#rooms" class="btn-outline">Смотреть номера</a>
+  </div>
+  
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">4.0★</div>
+      <div class="hero-stat-label">Рейтинг</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">12</div>
+      <div class="hero-stat-label">Номеров</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">24/7</div>
+      <div class="hero-stat-label">Сервис</div>
+    </div>
+  </div>
+  
+  <div class="hero-scroll">
+    <span>Прокрутить</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-visual reveal">
+      <div class="about-img-frame">
+        <div class="hotel-illustration">
+          <div class="hotel-icon-large">🏨</div>
+          <div class="hotel-icon-text">Hotel Jalal-Abad</div>
+        </div>
+      </div>
+      <div class="about-badge">
+        <div class="about-badge-num">3000</div>
+        <div class="about-badge-label">сом / ночь</div>
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="section-eyebrow reveal">Наша история</div>
+      <h2 class="section-title reveal">Место, где <em>уют</em><br>становится традицией</h2>
+      <p class="section-desc reveal">Отель Jalal-Abad расположен в самом центре города Джалал-Абад — на тихой улице Манаса, 25. Мы создаём пространство, где каждый гость ощущает тепло настоящего кыргызского гостеприимства.</p>
+      <div class="about-features reveal">
+        <div class="about-feature">
+          <span class="feature-icon">🌐</span>
+          <div class="feature-text">
+            <div class="feature-name">Wi-Fi</div>
+            <div class="feature-desc">Высокоскоростной интернет бесплатно</div>
+          </div>
+        </div>
+        <div class="about-feature">
+          <span class="feature-icon">🍳</span>
+          <div class="feature-text">
+            <div class="feature-name">Завтрак</div>
+            <div class="feature-desc">Включён в стоимость номера</div>
+          </div>
+        </div>
+        <div class="about-feature">
+          <span class="feature-icon">👗</span>
+          <div class="feature-text">
+            <div class="feature-name">Прачечная</div>
+            <div class="feature-desc">Профессиональный уход за одеждой</div>
+          </div>
+        </div>
+        <div class="about-feature">
+          <span class="feature-icon">🚭</span>
+          <div class="feature-text">
+            <div class="feature-name">Некурящий</div>
+            <div class="feature-desc">Свежий воздух во всех помещениях</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROOMS -->
+<section class="rooms" id="rooms">
+  <div class="rooms-header reveal">
+    <div class="section-eyebrow">Наши номера</div>
+    <h2 class="section-title">Пространство для <em>отдыха</em></h2>
+    <p class="section-desc">12 тщательно оформленных номеров, каждый — продуманное сочетание комфорта и стиля</p>
+  </div>
+  <div class="rooms-grid">
+    <div class="room-card reveal">
+      <div class="room-visual">
+        <div class="room-visual-bg" style="background: radial-gradient(ellipse at 40% 40%, rgba(201,168,76,0.15), transparent 60%), linear-gradient(135deg, #1a2235, #0d1221);"></div>
+        <div class="room-emoji">🛏️</div>
+        <div class="room-visual-label">Люкс-номер</div>
+        <div class="room-overlay"></div>
+        <div class="room-tag">Хит продаж</div>
+      </div>
+      <div class="room-info">
+        <h3 class="room-name">Премиум Люкс</h3>
+        <p class="room-detail">Просторный номер с панорамными окнами, king-size кроватью и всеми удобствами для максимального комфорта. Идеально для деловых и романтических поездок.</p>
+        <div class="room-amenities">
+          <span class="amenity-tag">King-size кровать</span>
+          <span class="amenity-tag">Wi-Fi</span>
+          <span class="amenity-tag">Завтрак</span>
+          <span class="amenity-tag">ТВ</span>
+          <span class="amenity-tag">Кондиционер</span>
+        </div>
+        <div class="room-footer">
+          <div class="room-price">
+            <span class="price-amount">5 500</span>
+            <div>
+              <div class="price-currency">сом</div>
+              <div class="price-period">за ночь</div>
+            </div>
+          </div>
+          <a href="#booking" class="room-book-btn">Забронировать</a>
+        </div>
+      </div>
+    </div>
+    <div class="room-card reveal reveal-delay-1">
+      <div class="room-visual">
+        <div class="room-visual-bg" style="background: radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.1), transparent 60%), linear-gradient(135deg, #131929, #1a2235);"></div>
+        <div class="room-emoji">🏠</div>
+        <div class="room-visual-label">Стандарт</div>
+        <div class="room-overlay"></div>
+      </div>
+      <div class="room-info">
+        <h3 class="room-name">Стандарт</h3>
+        <p class="room-detail">Уютный номер с двуспальной кроватью и всем необходимым для приятного отдыха.</p>
+        <div class="room-amenities">
+          <span class="amenity-tag">Двуспальная</span>
+          <span class="amenity-tag">Wi-Fi</span>
+          <span class="amenity-tag">Завтрак</span>
+        </div>
+        <div class="room-footer">
+          <div class="room-price">
+            <span class="price-amount">3 000</span>
+            <div>
+              <div class="price-currency">сом</div>
+              <div class="price-period">за ночь</div>
+            </div>
+          </div>
+          <a href="#booking" class="room-book-btn">Забронировать</a>
+        </div>
+      </div>
+    </div>
+    <div class="room-card reveal reveal-delay-2">
+      <div class="room-visual">
+        <div class="room-visual-bg" style="background: radial-gradient(ellipse at 50% 30%, rgba(201,168,76,0.08), transparent 60%), linear-gradient(135deg, #0d1221, #131929);"></div>
+        <div class="room-emoji">🏡</div>
+        <div class="room-visual-label">Семейный</div>
+        <div class="room-overlay"></div>
+        <div class="room-tag">Семейный</div>
+      </div>
+      <div class="room-info">
+        <h3 class="room-name">Семейный</h3>
+        <p class="room-detail">Просторный номер для всей семьи с дополнительными кроватями и удобствами.</p>
+        <div class="room-amenities">
+          <span class="amenity-tag">Доп. кровати</span>
+          <span class="amenity-tag">Wi-Fi</span>
+          <span class="amenity-tag">Завтрак</span>
+        </div>
+        <div class="room-footer">
+          <div class="room-price">
+            <span class="price-amount">4 500</span>
+            <div>
+              <div class="price-currency">сом</div>
+              <div class="price-period">за ночь</div>
+            </div>
+          </div>
+          <a href="#booking" class="room-book-btn">Забронировать</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="experience-inner">
+    <div class="exp-header reveal">
+      <div class="section-eyebrow">Наши услуги</div>
+      <h2 class="section-title">Всё для вашего <em>комфорта</em></h2>
+      <p class="section-desc">Мы позаботились о каждой детали, чтобы ваше пребывание было безупречным</p>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-item reveal">
+        <span class="exp-icon">🍳</span>
+        <div class="exp-name">Завтрак</div>
+        <p class="exp-desc">Ежедневный завтрак включён в стоимость. Домашняя кухня, свежие продукты каждое утро.</p>
+      </div>
+      <div class="exp-item reveal reveal-delay-1">
+        <span class="exp-icon">🌐</span>
+        <div class="exp-name">Wi-Fi</div>
+        <p class="exp-desc">Высокоскоростной интернет по всей территории отеля, бесплатно для всех гостей.</p>
+      </div>
+      <div class="exp-item reveal reveal-delay-2">
+        <span class="exp-icon">👗</span>
+        <div class="exp-name">Прачечная</div>
+        <p class="exp-desc">Профессиональная чистка и стирка вашей одежды с доставкой в номер.</p>
+      </div>
+      <div class="exp-item reveal reveal-delay-3">
+        <span class="exp-icon">🕐</span>
+        <div class="exp-name">24/7 Сервис</div>
+        <p class="exp-desc">Круглосуточная стойка регистрации и обслуживание. Мы всегда на связи.</p>
+      </div>
+      <div class="exp-item reveal">
+        <span class="exp-icon">🛡️</span>
+        <div class="exp-name">Безопасность</div>
+        <p class="exp-desc">Современная система безопасности и видеонаблюдение для вашего спокойствия.</p>
+      </div>
+      <div class="exp-item reveal reveal-delay-1">
+        <span class="exp-icon">🚗</span>
+        <div class="exp-name">Трансфер</div>
+        <p class="exp-desc">Организация трансфера из/в аэропорт и по городу по запросу.</p>
+      </div>
+      <div class="exp-item reveal reveal-delay-2">
+        <span class="exp-icon">📋</span>
+        <div class="exp-name">Консьерж</div>
+        <p class="exp-desc">Помощь с экскурсиями, ресторанами и любыми вопросами во время пребывания.</p>
+      </div>
+      <div class="exp-item reveal reveal-delay-3">
+        <span class="exp-icon">🌿</span>
+        <div class="exp-name">Уборка</div>
+        <p class="exp-desc">Ежедневная уборка номеров, свежее постельное бельё и полотенца.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="gallery-inner">
+    <div class="gallery-header reveal">
+      <div class="section-eyebrow">Фотогалерея</div>
+      <h2 class="section-title">Атмосфера <em>Jalal-Abad</em></h2>
+    </div>
+    <div class="gallery-mosaic reveal">
+      <div class="gallery-item"><div class="gallery-emoji">🏨</div><div class="gallery-item-label">Фасад</div></div>
+      <div class="gallery-item"><div class="gallery-emoji">🛋️</div><div class="gallery-item-label">Лобби</div></div>
+      <div class="gallery-item"><div class="gallery-emoji">🛏️</div><div class="gallery-item-label">Номер</div></div>
+      <div class="gallery-item"><div class="gallery-emoji">🍽️</div><div class="gallery-item-label">Завтрак</div></div>
+      <div class="gallery-item"><div class="gallery-emoji">🚿</div><div class="gallery-item-label">Ванная</div></div>
+      <div class="gallery-item"><div class="gallery-emoji">🌄</div><div class="gallery-item-label">Вид из окна</div></div>
+      <div class="gallery-item"><div class="gallery-emoji">🌿</div><div class="gallery-item-label">Интерьер</div></div>
+      <div class="gallery-item"><div class="gallery-emoji">☕</div><div class="gallery-item-label">Зона отдыха</div></div>
+    </div>
+    <div style="text-align:center; margin-top: 40px;" class="reveal">
+      <a href="https://instagram.com/jalalabad.hotel" target="_blank" class="btn-outline">Смотреть в Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonials-header reveal">
+      <div class="section-eyebrow">Отзывы гостей</div>
+      <h2 class="section-title">Они уже <em>побывали</em> у нас</h2>
+      <p class="section-desc">Рейтинг 4.0 на основе 64 оценок реальных гостей</p>
+    </div>
+    <div class="testimonials-track">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">Прекрасный отель в центре города. Персонал очень приветливый, завтрак вкусный. Обязательно вернусь при следующем визите в Джалал-Абад.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">👤</div>
+          <div>
+            <div class="author-name">Айгуль М.</div>
+            <div class="author-location">Бишкек</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">Останавливался в командировке. Чистые номера, быстрый Wi-Fi, удобное расположение. Работники отеля всегда готовы помочь с любым вопросом.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">👤</div>
+          <div>
+            <div class="author-name">Руслан К.</div>
+            <div class="author-location">Ош</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="testimonial-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="opacity:0.4">★</span>
+        </div>
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">Хорошее соотношение цена-качество. Тихое место, можно нормально отдохнуть. Завтрак включён — это большой плюс. Рекомендую гостям города.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">👤</div>
+          <div>
+            <div class="author-name">Назира Т.</div>
+            <div class="author-location">Джалал-Абад</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="booking-inner">
+    <div class="booking-header reveal">
+      <div class="section-eyebrow">Бронирование</div>
+      <h2 class="section-title">Забронируйте ваш <em>номер</em></h2>
+      <p class="section-desc">Заполните форму и мы свяжемся с вами в течение 30 минут</p>
+    </div>
+    <div class="booking-form reveal">
+      <div class="booking-row">
+        <div class="form-group">
+          <label class="form-label">Имя</label>
+          <input type="text" class="form-input" placeholder="Ваше имя" id="guestName"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Телефон</label>
+          <input type="tel" class="form-input" placeholder="+996 _ _ _ _ _ _ _ _ _" id="guestPhone"/>
+        </div>
+      </div>
+      <div class="booking-row">
+        <div class="form-group">
+          <label class="form-label">Дата заезда</label>
+          <input type="date" class="form-input" id="checkIn"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Дата выезда</label>
+          <input type="date" class="form-input" id="checkOut"/>
+        </div>
+      </div>
+      <div class="booking-row">
+        <div class="form-group">
+          <label class="form-label">Тип номера</label>
+          <select class="form-select" id="roomType">
+            <option value="">Выберите тип номера</option>
+            <option value="standard">Стандарт — от 3 000 сом</option>
+            <option value="family">Семейный — от 4 500 сом</option>
+            <option value="suite">Премиум Люкс — от 5 500 сом</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Количество гостей</label>
+          <select class="form-select">
+            <option>1 гость</option>
+            <option>2 гостя</option>
+            <option>3 гостя</option>
+            <option>4+ гостей</option>
+          </select>
+        </div>
+      </div>
+      <div class="booking-submit">
+        <div class="booking-note">
+          Бронирование бесплатно. Оплата при заезде.<br/>
+          <strong>Звоните: +996 509 447 717</strong>
+        </div>
+        <button class="btn-submit" onclick="submitBooking()">Отправить запрос</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="location-inner">
+    <div class="location-content">
+      <div class="section-eyebrow reveal">Как нас найти</div>
+      <h2 class="section-title reveal">Мы <em>ждём</em> вас</h2>
+      <div class="location-details reveal">
+        <div class="location-detail-item">
+          <span class="detail-icon">📍</span>
+          <div>
+            <div class="detail-title">Адрес</div>
+            <div class="detail-value">ул. Манаса, 25, Джалал-Абад<br/>Кыргызская Республика, 720900</div>
+          </div>
+        </div>
+        <div class="location-detail-item">
+          <span class="detail-icon">📞</span>
+          <div>
+            <div class="detail-title">Телефон</div>
+            <div class="detail-value"><a href="tel:+996509447717" class="detail-link">+996 509 447 717</a></div>
+          </div>
+        </div>
+        <div class="location-detail-item">
+          <span class="detail-icon">🕐</span>
+          <div>
+            <div class="detail-title">Режим работы</div>
+            <div class="detail-value">Круглосуточно, 365 дней в году</div>
+          </div>
+        </div>
+        <div class="location-detail-item">
+          <span class="detail-icon">📱</span>
+          <div>
+            <div class="detail-title">Мессенджеры</div>
+            <div class="detail-value">
+              <a href="https://wa.me/996509447717" target="_blank" class="detail-link">WhatsApp</a> &nbsp;·&nbsp;
+              <a href="https://t.me/+996509447717" target="_blank" class="detail-link">Telegram</a> &nbsp;·&nbsp;
+              <a href="https://instagram.com/jalalabad.hotel" target="_blank" class="detail-link">Instagram</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="location-map-area">
+        <div class="map-pin">📍</div>
+        <div class="map-address">ул. Манаса, 25<br/>Джалал-Абад</div>
+        <a href="https://2gis.kg/dzhalal-abad/firm/70000001084138620" target="_blank" class="map-link">Открыть на 2ГИС →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Jalal-Abad</div>
+        <div class="footer-tagline">Роскошь в сердце Кыргызстана</div>
+        <div class="footer-social">
+          <a href="https://instagram.com/jalalabad.hotel" target="_blank" class="social-btn" title="Instagram">📷</a>
+          <a href="https://wa.me/996509447717" target="_blank" class="social-btn" title="WhatsApp">💬</a>
+          <a href="https://t.me/+996509447717" target="_blank" class="social-btn" title="Telegram">✈️</a>
+          <a href="tel:+996509447717" class="social-btn" title="Позвонить">📞</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Навигация</div>
+        <ul class="footer-links">
+          <li><a href="#about">Об отеле</a></li>
+          <li><a href="#rooms">Номера</a></li>
+          <li><a href="#experience">Услуги</a></li>
+          <li><a href="#gallery">Галерея</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Услуги</div>
+        <ul class="footer-links">
+          <li><a href="#">Завтрак включён</a></li>
+          <li><a href="#">Wi-Fi</a></li>
+          <li><a href="#">Прачечная</a></li>
+          <li><a href="#">Трансфер</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Контакты</div>
+        <ul class="footer-links">
+          <li><a href="tel:+996509447717">+996 509 447 717</a></li>
+          <li><a href="https://instagram.com/jalalabad.hotel" target="_blank">@jalalabad.hotel</a></li>
+          <li><a href="#">ул. Манаса, 25</a></li>
+          <li><a href="#">Джалал-Абад, KG</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2024 Jalal-Abad Hotel. Все права защищены.</div>
+      <div class="footer-rating">
+        <div class="footer-rating-num">4.0★</div>
+        <div class="footer-rating-label">64 оценки<br/>на 2ГИС</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── PRELOADER ──
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('preloader').classList.add('hidden');
+  }, 1800);
+});
+
+// ── PARTICLES ──
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let W, H;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.size = Math.random() * 1.5 + 0.3;
+    this.speedX = (Math.random() - 0.5) * 0.3;
+    this.speedY = -Math.random() * 0.5 - 0.1;
+    this.opacity = Math.random() * 0.6 + 0.1;
+    this.life = 0;
+    this.maxLife = Math.random() * 300 + 200;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.life++;
+    if (this.life > this.maxLife || this.y < -10) this.reset();
+  }
+  draw() {
+    const lifeRatio = this.life / this.maxLife;
+    const alpha = this.opacity * Math.sin(lifeRatio * Math.PI);
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(201, 168, 76, ${alpha})`;
+    ctx.fill();
+  }
+}
+
+for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+function animateParticles() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ── NAV SCROLL ──
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── REVEAL ON SCROLL ──
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+// ── BOOKING MODAL ──
+function submitBooking() {
+  const name = document.getElementById('guestName').value.trim();
+  const phone = document.getElementById('guestPhone').value.trim();
+  if (!name || !phone) {
+    alert('Пожалуйста, заполните имя и телефон.');
+    return;
+  }
+  document.getElementById('bookingModal').classList.add('active');
+}
+function closeModal() {
+  document.getElementById('bookingModal').classList.remove('active');
+}
+document.getElementById('bookingModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ── SMOOTH SCROLL ──
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ── SET MIN DATE FOR BOOKING ──
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('checkIn').min = today;
+document.getElementById('checkOut').min = today;
+document.getElementById('checkIn').addEventListener('change', function() {
+  document.getElementById('checkOut').min = this.value;
+});
+</script>
+</body>
+</html>
